@@ -1,5 +1,7 @@
 <?php
 require_once '../config/fungsi.php';
+require_once 'config/koneksi.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +12,11 @@ require_once '../config/fungsi.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: aliceblue;
+        }
+    </style>
 </head>
 
 <body>

@@ -15,21 +15,28 @@
                             <th>NAMA</th>
                             <th>ALAMAT</th>
                             <th>JURUSAN</th>
+                            <th>AKSI</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>123</td>
-                            <td>Tarjo</td>
-                            <td>Ambon</td>
-                            <td>Teknik Informatika</td>
-                        </tr>
-                        <tr>
-                            <td>123</td>
-                            <td>Tarjo</td>
-                            <td>Ambon</td>
-                            <td>Teknik Informatika</td>
-                        </tr>
+                        <?php
+                        $sql = $con->query("SELECT * FROM mhs");
+                        while ($row = $sql->fetch()) {
+                            echo "<tr>
+                                    <td>$row[nim]</td>
+                                    <td>$row[nama]</td>
+                                    <td>$row[jurusan]</td>
+                                    <td>$row[alamat]</td>
+                                    <td>
+                                        <a href='index.php?page=mahasiswa_edit&nim=$row[nim]' class='btn btn-sm btn-warning'>Edit</a>
+                                        <a href='index.php?page=mahasiswa_delete&nim=$row[nim]' class='btn btn-sm btn-danger' onclick=\"return confirm('Hapus data ini?')\">Delete</a>
+                                    </td>
+                                </tr>";
+
+                            // delete -> nim -> delete where nim
+                            // edit -> nim -> cari data where nim -> tampilkan ke form -> update
+                        }
+                        ?>
                     </tbody>
                 </table>
             </div>
@@ -46,18 +53,18 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="">
+                <form action="index.php?page=mahasiswa_save" method="POST">
                     <div class="mb-2">
                         <label for="" class="form-label">NIM</label>
-                        <input type="text" class="form-control" placeholder="Masukan NIM">
+                        <input type="text" name="nim" class="form-control" placeholder="Masukan NIM">
                     </div>
                     <div class="mb-2">
                         <label for="" class="form-label">Nama</label>
-                        <input type="text" class="form-control" placeholder="Masukan Nama">
+                        <input type="text" name="nama" class="form-control" placeholder="Masukan Nama">
                     </div>
                     <div class="mb-2">
                         <label for="" class="form-label">Jurusan</label>
-                        <select name="" id="" class="form-select">
+                        <select name="jurusan" id="" class="form-select">
                             <option>Teknik Informatika</option>
                             <option>Sistem Informasi</option>
                             <option>Manajemen Informatika</option>
@@ -66,7 +73,7 @@
                     </div>
                     <div class="mb-2">
                         <label for="" class="form-label">Alamat</label>
-                        <textarea name="" class="form-control" placeholder="Masukan Alamat.."></textarea>
+                        <textarea name="alamat" class="form-control" placeholder="Masukan Alamat.."></textarea>
                     </div>
                     <hr>
                     <div class="mb-2">
