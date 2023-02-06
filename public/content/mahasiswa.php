@@ -1,28 +1,29 @@
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <h5>Data Mahasiswa</h5>
-                <hr>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formMahasiswa">
-                    Tambah Mahasiswa
-                </button>
-                <table class="mt-2 table table-bordered">
-                    <thead class="bg-light">
-                        <tr>
-                            <th>NIM</th>
-                            <th>NAMA</th>
-                            <th>ALAMAT</th>
-                            <th>JURUSAN</th>
-                            <th>AKSI</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $sql = $con->query("SELECT * FROM mhs");
-                        while ($row = $sql->fetch()) {
-                            echo "<tr>
+<?php if ($level == "Admin") : ?>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Data Mahasiswa</h5>
+                    <hr>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formMahasiswa">
+                        Tambah Mahasiswa
+                    </button>
+                    <table class="mt-2 table table-bordered">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>NIM</th>
+                                <th>NAMA</th>
+                                <th>ALAMAT</th>
+                                <th>JURUSAN</th>
+                                <th>AKSI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $sql = $con->query("SELECT * FROM mhs");
+                            while ($row = $sql->fetch()) {
+                                echo "<tr>
                                     <td>$row[nim]</td>
                                     <td>$row[nama]</td>
                                     <td>$row[jurusan]</td>
@@ -33,55 +34,56 @@
                                     </td>
                                 </tr>";
 
-                            // delete -> nim -> delete where nim
-                            // edit -> nim -> cari data where nim -> tampilkan ke form -> update
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                                // delete -> nim -> delete where nim
+                                // edit -> nim -> cari data where nim -> tampilkan ke form -> update
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Modal -->
-<div class="modal fade" id="formMahasiswa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Form Mahasiswa</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="index.php?page=mahasiswa_save" method="POST">
-                    <div class="mb-2">
-                        <label for="" class="form-label">NIM</label>
-                        <input type="text" name="nim" class="form-control" placeholder="Masukan NIM">
-                    </div>
-                    <div class="mb-2">
-                        <label for="" class="form-label">Nama</label>
-                        <input type="text" name="nama" class="form-control" placeholder="Masukan Nama">
-                    </div>
-                    <div class="mb-2">
-                        <label for="" class="form-label">Jurusan</label>
-                        <select name="jurusan" id="" class="form-select">
-                            <option>Teknik Informatika</option>
-                            <option>Sistem Informasi</option>
-                            <option>Manajemen Informatika</option>
-                            <option>Komputerisasi Akuntansi</option>
-                        </select>
-                    </div>
-                    <div class="mb-2">
-                        <label for="" class="form-label">Alamat</label>
-                        <textarea name="alamat" class="form-control" placeholder="Masukan Alamat.."></textarea>
-                    </div>
-                    <hr>
-                    <div class="mb-2">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
+    <!-- Modal -->
+    <div class="modal fade" id="formMahasiswa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Form Mahasiswa</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="index.php?page=mahasiswa_save" method="POST">
+                        <div class="mb-2">
+                            <label for="" class="form-label">NIM</label>
+                            <input type="text" name="nim" class="form-control" placeholder="Masukan NIM">
+                        </div>
+                        <div class="mb-2">
+                            <label for="" class="form-label">Nama</label>
+                            <input type="text" name="nama" class="form-control" placeholder="Masukan Nama">
+                        </div>
+                        <div class="mb-2">
+                            <label for="" class="form-label">Jurusan</label>
+                            <select name="jurusan" id="" class="form-select">
+                                <option>Teknik Informatika</option>
+                                <option>Sistem Informasi</option>
+                                <option>Manajemen Informatika</option>
+                                <option>Komputerisasi Akuntansi</option>
+                            </select>
+                        </div>
+                        <div class="mb-2">
+                            <label for="" class="form-label">Alamat</label>
+                            <textarea name="alamat" class="form-control" placeholder="Masukan Alamat.."></textarea>
+                        </div>
+                        <hr>
+                        <div class="mb-2">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+<?php endif; ?>

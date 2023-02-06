@@ -13,8 +13,15 @@ if (empty($nim) || empty($nama) || empty($alamat)) {
 } else {
 
     //update 
-    $sql = "UPDATE mhs SET nama = '$nama', jurusan = '$jurusan', alamat = '$alamat' WHERE nim = '$nim'";
-    $simpan = $con->query($sql);
+    $sql = "UPDATE mhs SET nama = :nama, jurusan = :jurusan, alamat = :alamat WHERE nim = :nim";
+    $simpan = $con->prepare($sql);
+    #bind
+    $simpan->bindParam('nama', $nama);
+    $simpan->bindParam('jurusan', $jurusan);
+    $simpan->bindParam('alamat', $alamat);
+    $simpan->bindParam('nim', $nim);
+    # execute
+    $simpan->execute();
 
     if ($simpan->rowCount() > 0) {
         echo "<script>
